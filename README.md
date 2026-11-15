@@ -129,6 +129,8 @@ Red flags: student, job seeker, someone selling to us, budget under $1,000, B2C 
 - "No bookings yet" instead of $0 when dividing by zero.
 - Ad spend: Meta about $92/day, website SEO retainer + tools $1,590/month, referral partner rewards $600/month (`em_ad_spend.csv`).
 - 30 days of realistic sample history (flagged `is_demo`, `@example.com`, never emailed) with an on/off switch.
+- `supabase/em_refresh_demo_dates.sql` moves the sample history forward to end yesterday, so "Last 30 days" always has data in a demo.
+- Light/dark switch that follows the viewer's system setting by default and remembers their choice in their own browser.
 
 **Security**
 - All secrets live in n8n credentials or Vercel environment variables, never in nodes, code, the repo, screenshots or the Loom.
@@ -146,7 +148,7 @@ Red flags: student, job seeker, someone selling to us, budget under $1,000, B2C 
 
 ## Run it yourself
 
-1. Supabase: run `supabase/em_schema.sql`, then `supabase/em_dashboard_setup.sql` (the ad spend sheet is also in `supabase/em_ad_spend.csv`).
+1. Supabase: run `supabase/em_schema.sql`, then `supabase/em_dashboard_setup.sql` (the ad spend sheet is also in `supabase/em_ad_spend.csv`). Before a demo, run `supabase/em_refresh_demo_dates.sql` so the sample data covers the last 30 days.
 2. n8n: import the 4 exported workflow JSON files (submitted with the project), then create credentials `EM-Supabase` (Postgres), `EM-Gemini`, `EM-Gmail`, and set EM-04 as the error workflow of EM-01/02/03.
 3. GHL: create the pipeline, calendar and 4 appointment workflows above; point their Webhook action to `…/webhook/em-appointment`.
 4. Dashboard: see `DASHBOARD.md` (deploy on Vercel with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`).

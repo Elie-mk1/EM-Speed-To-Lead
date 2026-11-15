@@ -7,9 +7,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Applies a saved theme before the page paints, so dark mode never flashes white.
+const themeScript = `try{var t=localStorage.getItem('em-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

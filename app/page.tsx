@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { dateWindow, getMetrics, parseRange, RANGES, type SourceRow } from '@/lib/metrics';
 import { SOURCE_LABEL, minutes, money, moneyRound, pct, rate } from '@/lib/format';
+import ThemeToggle from './theme-toggle';
 
 export const dynamic = 'force-dynamic'; // always fresh numbers
 
@@ -55,6 +56,7 @@ export default async function Page({ searchParams }: Props) {
           <Link href={link(days, !includeDemo)} className="toggle" aria-pressed={includeDemo}>
             <span className={`dot ${includeDemo ? 'dot-on' : ''}`} aria-hidden /> Sample data {includeDemo ? 'on' : 'off'}
           </Link>
+          <ThemeToggle />
         </nav>
       </header>
 
