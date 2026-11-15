@@ -34,7 +34,7 @@ A B2B agency's leads come from Meta ads, the website and referrals. This system 
  Dashboard (Vercel) → reads one SQL function in Supabase → cost per booked call by source
 ```
 
-### The 4 n8n workflows (exported JSON included)
+### The 4 n8n workflows (exported JSON submitted with the project)
 
 | Workflow | Job |
 |---|---|
@@ -147,7 +147,7 @@ Red flags: student, job seeker, someone selling to us, budget under $1,000, B2C 
 ## Run it yourself
 
 1. Supabase: run `supabase/em_schema.sql`, then `supabase/em_dashboard_setup.sql` (the ad spend sheet is also in `supabase/em_ad_spend.csv`).
-2. n8n: import the 4 workflow JSON files from `n8n-workflows/`, then create credentials `EM-Supabase` (Postgres), `EM-Gemini`, `EM-Gmail`, and set EM-04 as the error workflow of EM-01/02/03.
+2. n8n: import the 4 exported workflow JSON files (submitted with the project), then create credentials `EM-Supabase` (Postgres), `EM-Gemini`, `EM-Gmail`, and set EM-04 as the error workflow of EM-01/02/03.
 3. GHL: create the pipeline, calendar and 4 appointment workflows above; point their Webhook action to `…/webhook/em-appointment`.
 4. Dashboard: see `DASHBOARD.md` (deploy on Vercel with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`).
 5. Send a test lead:
